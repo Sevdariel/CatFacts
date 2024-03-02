@@ -1,9 +1,11 @@
-<div class="mb-3">
-    <input type="text" placeholder="Login">
-</div>
-<div class="mb-3">
-    <input type="text" placeholder="Password">
-</div>
-<div>
-    <button class="btn btn-success me-2" type="submit">Sign in</button>
-</div>
+<form [formGroup]="loginForm">
+    <div class="mb-3">
+        <input formControlName="login" type="text" placeholder="Login">
+    </div>
+    <div class="mb-3">
+        <input formControlName="password" type="text" placeholder="Password">
+    </div>
+    <div>
+        <button class="btn btn-success me-2" type="submit">Sign in</button>
+    </div>
+</form>
