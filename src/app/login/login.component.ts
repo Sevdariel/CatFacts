@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,9 @@ export class LoginComponent {
     password: new FormControl(),
   });
 
-  constructor() {
+  constructor(private loginService: LoginService) { }
 
+  public login() {
+    this.loginService.login();
   }
 }
