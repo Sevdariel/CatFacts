@@ -1,1 +1,6 @@
+## angular files and folders
 node_modules/
+
+## vs code files and folders
+.vscode
+.editorconfig
