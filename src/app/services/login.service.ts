@@ -6,11 +6,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoginService {
 
-  public currentUser$ = new BehaviorSubject<string>('');
+  private currentTokenSource = new BehaviorSubject<string>('');
+  public currentToken$ = this.currentTokenSource.asObservable();
 
   public login() {
     const token = crypto.randomUUID();
     localStorage.setItem('token', token);
-    this.currentUser$.next(token)
+    this.currentTokenSource.next(token)
   }
 }
