@@ -1,5 +1,6 @@
 ## angular files and folders
 node_modules/
+.angular
 
 ## vs code files and folders
 .vscode
