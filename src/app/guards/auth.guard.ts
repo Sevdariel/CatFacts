@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
         return true;
       }
       else {
-        console.log('You can\'t go there');
+        alert('You can\'t go there');
 
         return false;
       }
