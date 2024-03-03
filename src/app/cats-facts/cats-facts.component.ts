@@ -36,12 +36,12 @@ export class CatsFactsComponent {
   public onScroll() {
     this.catFactsService.getCatFact()
       .pipe(
-        filter(catFact => !this.catFacts$.value.includes(catFact)),
         repeat(4),
+        filter(catFact => !this.catFacts$.value.includes(catFact)),
       ).subscribe(catFact => {
         this.catFacts$.next([...this.catFacts$.value, catFact]);
         this.changeDetectorRef.detectChanges();
-      }
+      },
       )
   }
 }
