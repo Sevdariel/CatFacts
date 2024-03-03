@@ -10,18 +10,18 @@ export class CatFactsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getCatFact(): Observable<ICatFact> {
+  public getCatFact(): Observable<string> {
     return this.httpClient.get<ICatFact>('https://meowfacts.herokuapp.com/')
       .pipe(
-        // mergeMap(catFact => catFact.data),
+        mergeMap(catFact => catFact.data),
       );
   }
 
-  public getCatFacts(number: number): Observable<Array<ICatFact>> {
+  public getCatFacts(number: number): Observable<Array<string>> {
     return this.httpClient.get<ICatFact>('https://meowfacts.herokuapp.com/')
       .pipe(
         repeat(number),
-        // mergeMap(catFact => catFact.data),
+        mergeMap(catFact => catFact.data),
         toArray(),
       );
   }

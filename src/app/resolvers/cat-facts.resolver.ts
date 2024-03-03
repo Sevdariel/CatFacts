@@ -1,10 +1,9 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { CatFactsService } from '../services/cat-facts.service';
-import { ICatFact } from '../model/cat-facts.model';
 
-export const catFactsResolver: ResolveFn<Array<ICatFact>> = (route, state) => {
+export const catFactsResolver: ResolveFn<Array<string>> = (route, state) => {
   const catFactsService = inject(CatFactsService);
 
-  return catFactsService.getCatFacts(20);
+  return catFactsService.getCatFacts(30);
 };

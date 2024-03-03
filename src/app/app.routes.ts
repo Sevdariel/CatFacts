@@ -18,7 +18,7 @@ export const routesConfig: Routes = [
     {
         path: 'facts',
         component: CatsFactsComponent,
-        canActivate: [authGuard],
+        // canActivate: [authGuard],
         title: 'Cats facts',
         resolve: {catFacts: catFactsResolver},
     },
