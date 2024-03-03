@@ -1,11 +1,20 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-    <div class="mb-3">
-        <input formControlName="login" type="text" placeholder="Login">
-    </div>
-    <div class="mb-3">
-        <input formControlName="password" type="text" placeholder="Password">
-    </div>
-    <div>
-        <button class="btn btn-success me-2" type="submit">Sign in</button>
-    </div>
-</form>
+<div class="container text-center" style="margin-top: 30px;">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="row g-3"
+        [ngClass]="{'was-validated': loginFormValidationAfterSubmit}" novalidate>
+        <div class="mb-3">
+            <label for="loginFormControl" class="form-label">Login</label>
+            <input id="loginFormControl" class="form-control" formControlName="login" type="text" placeholder="Login"
+                required>
+            <div class="invalid-feedback">Login is required</div>
+        </div>
+        <div class="mb-3">
+            <label for="passwordFormControl" class="form-label">Password</label>
+            <input id="passwordFormControl" class="form-control" formControlName="password" type="password"
+                placeholder="Password" required>
+            <div class="invalid-feedback">Password is required</div>
+        </div>
+        <div>
+            <button class="btn btn-success me-2" type="submit">Sign in</button>
+        </div>
+    </form>
+</div>
