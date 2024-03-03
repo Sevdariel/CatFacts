@@ -1,8 +1,12 @@
-@for (catFact of catFacts; track $index) {
-<div class="card" style="width: 18rem">
-    <div class="card-body">
-        <h5 class="card-title">Cat fact no. {{$index + 1}}</h5>
-        <p class="card-text">{{catFact.data}}</p>
+<div class="container text-center" infinite-scroll (scrolled)="sendRequest()">
+    <div class="row row-cols-4">
+        @for (catFact of catFacts | async; track $index) {
+        <div class="card col">
+            <div class="card-body">
+                <h5 class="card-title">Cat fact no. {{$index + 1}}</h5>
+                <p class="card-text">{{catFact.data}}</p>
+            </div>
+        </div>
+        }
     </div>
 </div>
-}

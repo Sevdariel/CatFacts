@@ -10,8 +10,8 @@ export class CatFactsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getCatFact() {
-    return this.httpClient.get('https://meowfacts.herokuapp.com/');
+  public getCatFact(): Observable<ICatFact> {
+    return this.httpClient.get<ICatFact>('https://meowfacts.herokuapp.com/');
   }
 
   public getCatFacts(number: number): Observable<Array<ICatFact>> {
