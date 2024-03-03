@@ -6,5 +6,5 @@ import { ICatFact } from '../model/cat-facts.model';
 export const catFactsResolver: ResolveFn<Array<ICatFact>> = (route, state) => {
   const catFactsService = inject(CatFactsService);
 
-  return catFactsService.getCatFacts(30);
+  return catFactsService.getCatFacts(20);
 };

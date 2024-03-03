@@ -43,10 +43,11 @@ export class CatsFactsComponent {
   public onScroll() {
     this.catFactsService.getCatFact()
       .pipe(
-        filter(catFact => !this.catFacts$.value.includes(catFact)),
         repeat(4),
       ).subscribe(catFact => {
-        this.catFacts$.next([...this.catFacts$.value, catFact]);
+        if (!this.catFacts$.value.some(obj => obj.data[0] === catFact.data[0])) {
+          this.catFacts$.next([...this.catFacts$.value, catFact]);
+        } 
         this.changeDetectorRef.detectChanges();
       }
       )
