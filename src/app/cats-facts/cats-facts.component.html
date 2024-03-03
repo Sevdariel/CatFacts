@@ -1,6 +1,7 @@
-<div class="container text-center" infinite-scroll (scrolled)="sendRequest()">
-    <div class="row row-cols-4">
-        @for (catFact of catFacts | async; track $index) {
+<div class="container text-center">
+    <div class="row row-cols-4 cat-card-container" [scrollWindow]="false" infinite-scroll [infiniteScrollDistance]="1"
+        (scrolled)="onScroll()">
+        @for (catFact of catFacts$ | async; track $index) {
         <div class="card col">
             <div class="card-body">
                 <h5 class="card-title">Cat fact no. {{$index + 1}}</h5>

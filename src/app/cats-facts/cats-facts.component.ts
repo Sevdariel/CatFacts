@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, take } from 'rxjs';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { BehaviorSubject, filter, repeat, take } from 'rxjs';
 import { ICatFact } from '../model/cat-facts.model';
 import { CatFactsService } from '../services/cat-facts.service';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cats-facts',
@@ -17,11 +17,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cats-facts.component.scss'
 })
 export class CatsFactsComponent {
-
-  public catFacts = new BehaviorSubject<Array<ICatFact>>([]);
+  public catFacts$ = new BehaviorSubject<Array<ICatFact>>([]);
 
   constructor(
     private catFactsService: CatFactsService,
+    private changeDetectorRef: ChangeDetectorRef,
     activatedRoute: ActivatedRoute,
   ) {
     activatedRoute.data
@@ -29,17 +29,25 @@ export class CatsFactsComponent {
         take(1),
       )
       .subscribe(routeData => {
-        this.catFacts.next([...new Set(routeData['catFacts'] as Array<ICatFact>)]);
+        const routeCatFacts: Array<ICatFact> = routeData['catFacts'];
+        const uniqueCatFacts = routeCatFacts.reduce((acc: Array<ICatFact>, curr: ICatFact) => {
+          if (!acc.some(obj => obj.data[0] === curr.data[0])) {
+            acc.push(curr);
+          }
+          return acc;
+        }, [])
+        this.catFacts$.next([...new Set(uniqueCatFacts)]);
       });
   }
 
-  public sendRequest() {
-    console.log('sendRequest')
+  public onScroll() {
     this.catFactsService.getCatFact()
       .pipe(
-        take(1),
+        filter(catFact => !this.catFacts$.value.includes(catFact)),
+        repeat(4),
       ).subscribe(catFact => {
-        this.catFacts.next([...this.catFacts.value, catFact])
+        this.catFacts$.next([...this.catFacts$.value, catFact]);
+        this.changeDetectorRef.detectChanges();
       }
       )
   }
