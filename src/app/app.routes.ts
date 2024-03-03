@@ -20,6 +20,6 @@ export const routesConfig: Routes = [
         component: CatsFactsComponent,
         canActivate: [authGuard],
         title: 'Cats facts',
-        resolve: [catFactsResolver],
+        resolve: {catFacts: catFactsResolver},
     },
 ];
