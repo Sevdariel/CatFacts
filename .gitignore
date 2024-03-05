@@ -5,3 +5,6 @@ node_modules/
 ## vs code files and folders
 .vscode
 .editorconfig
+
+#karma
+coverage
